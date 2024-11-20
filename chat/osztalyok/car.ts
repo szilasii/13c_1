@@ -21,6 +21,8 @@ class Bauto implements IKocsi {
     }
     
 }
+
+
 class Auto {
     //Properties, Tulajdonságok
     /*
