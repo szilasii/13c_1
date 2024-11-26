@@ -42,7 +42,8 @@ export async function  deleteUser(req:Request,res:Response) {
             res.status(200).send({success: 'A felhasználó törölve lett'})
         })  
 }
-export async function  addUser(req:Request,res:Response) {
+export async function  addUser(req:Request,res:any) {
+    
     try {
         const user : IUser = req.body as IUser
         const conn = await mysqlP.createConnection(dbConfig)
@@ -59,14 +60,20 @@ export async function  addUser(req:Request,res:Response) {
         }
     }
 }
-export async function  updateUser(req:Request,res:Response) {
-    if (!req.params.UserId) {
-        res.status(401).send({error:"Hiányzó patraméter"})
-        return
+export async function updateUser(req:Request,res:any) {
+    console.log(res.decodedToken)
+    if (!res.decodedToken.UserId) {
+        res.status(401).send({error:"Nincs jogosultsága a modosításra"})
+            return 
     }
+    
+    // if (!req.params.UserId) {
+    //     res.status(401).send({error:"Hiányzó patraméter"})
+    //     return
+    // }
            
     const oldUser :User = new User()
-    const siker = await oldUser.loadUserFromDB(parseInt(req.params.UserId as string))
+    const siker = await oldUser.loadUserFromDB(parseInt(res.decodedToken.UserId as string))
     let user :User = oldUser as User
     Object.assign(user,req.body)
    

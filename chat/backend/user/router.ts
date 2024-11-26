@@ -6,7 +6,7 @@ const router : Router = Router()
 router.get('/user', user.getUser)
 router.get('/user/:id', user.getUser)
 router.post('/user',auth,user.addUser)
-router.put('/user/:UserId',auth,user.updateUser)
+router.put('/user',auth,user.updateUser)
 router.delete('/user/:id',auth,user.deleteUser)
 
 export default router

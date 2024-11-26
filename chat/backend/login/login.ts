@@ -23,7 +23,7 @@ if (!await user.loadUserFromDB(UserId))
     return 
 }
 
-const payload = {Userid:user.UserId}
+const payload = {UserId:user.UserId}
 const {JWT_STRING} = process.env
 if(!JWT_STRING) {
     res.status(401).send({error:"Hiba történt a token létrehozásakor"})
